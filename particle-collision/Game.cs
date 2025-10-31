@@ -1,32 +1,38 @@
-﻿// Include the namespaces (code libraries) you need below.
-using System;
+﻿using System;
 using System.Numerics;
 
-// The namespace your code is in.
 namespace MohawkGame2D
 {
-    /// <summary>
-    ///     Your game code goes inside this class!
-    /// </summary>
     public class Game
     {
-        // Place your variables here:
+        Particle[] particles = new Particle[100];
+        Obstacle[] obstacles = [
+                new Obstacle(new Vector2(150, 150), new Vector2(100)),
+                new Obstacle(new Vector2(50, 50), new Vector2(25)),
+                new Obstacle(new Vector2(325, 325), new Vector2(25)),
+            ];
 
-
-        /// <summary>
-        ///     Setup runs once before the game loop begins.
-        /// </summary>
         public void Setup()
         {
+            Window.SetTitle("Particle Collision");
+            Window.SetSize(400, 400);
 
+            for (int i = 0; i < particles.Length; i++)
+            {
+                particles[i] = new Particle();
+                particles[i].Setup();
+            }
         }
 
-        /// <summary>
-        ///     Update runs every frame.
-        /// </summary>
         public void Update()
         {
+            Window.ClearBackground(Color.OffWhite);
 
+            for (int i = 0; i < obstacles.Length; i++)
+                obstacles[i].Update();
+
+            for (int i = 0; i < particles.Length; i++)
+                particles[i].Update(obstacles);
         }
     }
 
