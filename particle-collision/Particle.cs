@@ -6,6 +6,7 @@ namespace MohawkGame2D;
 public class Particle
 {
     Vector2 position;
+    Vector2 previousPosition;
     Vector2 velocity;
     int size;
     Color color;
@@ -25,6 +26,9 @@ public class Particle
 
     public void Update(Obstacle[] obstacles)
     {
+        // Record where we are
+        previousPosition = position;
+        
         // Move particle
         position += velocity * Time.DeltaTime;
 
@@ -99,8 +103,24 @@ public class Particle
         // is colliding at all
         if (isParticleWithinL && isParticleWithinR && isParticleWithinT && isParticleWithinB)
         {
-            // compare to centre of obstacle, snap to closes edge
+            //// compare to centre of obstacle, snap to closes edge
+            //float obstacleCentreX = obstacle.position.X + obstacle.size.X / 2;
+            //float obstacleCentreY = obstacle.position.Y + obstacle.size.Y / 2;
 
+            //// if previous position is left of left edge and current position is left of centre
+            //if (previousPosition.X + size < obstacleL && particleR < obstacleCentreX)
+            //    position.X = obstacleL - size - 1;
+            //// if previous position is right of right edge and current position is right of centre
+            //if (previousPosition.X > obstacleR && particleL > obstacleCentreX)
+            //    position.X = obstacleR + 1;
+            //// if previous position is below bottom and current position is below centre
+            //if (previousPosition.Y > obstacleB && particleT > obstacleCentreY)
+            //    position.Y = obstacleB + 1;
+            //// if previous position is above top and current position is above centre
+            //if (previousPosition.Y + size < obstacleT && particleB < obstacleCentreY)
+            //    position.Y = obstacleT - size - 1;
+
+            //
             if (particleB <= obstacleB && particleT >= obstacleT)
             {
                 velocity.X = -velocity.X;

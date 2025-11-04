@@ -28,11 +28,11 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.OffWhite);
 
-            for (int i = 0; i < obstacles.Length; i++)
-                obstacles[i].Update();
-
             for (int i = 0; i < particles.Length; i++)
                 particles[i].Update(obstacles);
+
+            for (int i = 0; i < obstacles.Length; i++)
+                obstacles[i].Update();
         }
     }
 
